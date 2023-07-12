@@ -1,3 +1,8 @@
+$bg-grey: #232323;
+$accent-blue: #0094ff;
+$bg-blue: #3daeff;
+$border-blue: #7bc5f9;
+
 body {
     margin: 0;
     display: flex;
@@ -6,7 +11,7 @@ body {
 
 header {
     flex: 1;
-    background-color: #0094ff;
+    background-color: $accent-blue;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -21,9 +26,9 @@ header {
         display: flex;
         align-items: center;
         margin: 0 25%;
-        border: 2px solid #7bc5f9;
+        border: 2px solid $border-blue;
         border-radius: 0.5rem;
-        background-color: #3daeff;
+        background-color: $bg-blue;
 
         & > span {
             display: flex;
@@ -48,8 +53,8 @@ header {
     }
 
     & > button#random {
-        background: none;
-        border: 2px solid #7bc5f9;
+        background-color: $bg-blue;
+        border: 2px solid $border-blue;
         color: white;
         display: flex;
         align-items: center;
@@ -60,5 +65,5 @@ header {
 
 main {
     flex: 20;
-    background-color: #232323;
+    background-color: $bg-grey;
 }
