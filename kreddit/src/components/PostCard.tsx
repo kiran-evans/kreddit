@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -15,18 +16,20 @@ export const PostCard = (props: any) => {
         score,
         subreddit_name_prefixed,
         url,
-        domain
+        domain,
+        selftext
     } = data;
     
     return (
         <article className="postCard">
-            {thumbnail_width && <img src={thumbnail} alt={thumbnail} />}
+            {thumbnail_width && <img src={thumbnail} />}
             <section>
+                {(!domain.includes("self") && !domain.includes("redd.it")) && <a className="originLink" href={url} target="_blank" rel="noopener noreferrer" title={`Go to original source on ${domain}`}><OpenInNew sx={{ fontSize: "small" }} />&nbsp;{domain}</a>}
                 <h2>{title}</h2>
-                <p className="author">{author}</p>
-                <p className="subreddit">{subreddit_name_prefixed}</p>
+                <p className="author"><a href={`https://www.reddit.com/u/${author}`} title={`Go to ${author}'s profile`} target="_blank" rel="noopener noreferrer">{author}</a></p>
+                <p className="subreddit"><a href={`https://www.reddit.com/${subreddit_name_prefixed}`} title={`Go to ${subreddit_name_prefixed} homepage`} target="_blank" rel="noopener noreferrer">{subreddit_name_prefixed}</a></p>
                 <p className="score">{Intl.NumberFormat('en-GB').format(score)}</p>
-                {!domain.includes("self") && <a className="originLink" href={url} target="_blank" rel="noopener noreferrer"><OpenInNew sx={{ fontSize: "small" }} />&nbsp;{domain}</a>}
+                {selftext && <p className="selftext">{selftext}</p>}
             </section>
         </article>
     )

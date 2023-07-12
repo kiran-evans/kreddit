@@ -1,8 +1,13 @@
 $bg-grey: #232323;
 $light-grey: #323232;
+$lighter-grey: #4f4f4f;
 $accent-blue: #0094ff;
 $bg-blue: #3daeff;
 $border-blue: #7bc5f9;
+
+* {
+    transition-duration: 200ms;
+}
 
 body {
     margin: 0;
@@ -74,28 +79,54 @@ main {
     flex: 20 100%;
     background-color: $bg-grey;
     display: flex;
-    gap: 2rem;
-    flex-flow: wrap;
-    overflow-y: auto;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    gap: 1rem;
 
     & article.postCard {
-        flex: 1 25%;
+        flex: 1 1 20%;
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        max-width: 50%;
+        max-width: 500px;
+        max-height: 200px;
+        overflow: hidden;
+        cursor: pointer;
+        border-radius: 0.6rem;
+        box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.2);
+
+        &:hover {
+            & section {
+                background-color: $lighter-grey;
+            }
+        }
 
         & img {
-            max-width: 100%;
+            flex: 1;
+            height: auto;
+            object-fit: cover;
         }
 
         & section {
+            flex: 1;
             background-color: $light-grey;
             padding: 1rem 1rem;
 
+            & a.originLink {
+                font-size: small;
+                display: flex;
+                align-items: center;
+                color: $accent-blue;
+                margin-bottom: 0.5rem;
+            }
+
             & h2 {
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
                 margin: 0;
-                margin-bottom: 1rem;
+                margin-bottom: 0.5rem;
+                font-size: large;
+                line-height: 1.3;
             }
 
             & p {
@@ -103,21 +134,33 @@ main {
 
                 &.author {
                     display: inline;
+
+                    & a {
+                        color: white;
+                        text-decoration: none;
+                    }
                 }
 
                 &.subreddit {
                     float: right;
+
+                    & a {
+                        color: white;
+                        text-decoration: none;
+                    }
                 }
 
                 &.score {
                     font-weight: bold;
                 }
-            }
 
-            & a.originLink {
-                display: flex;
-                align-items: center;
-                color: $accent-blue;
+                &.selftext {
+                    display: -webkit-box;
+                    overflow : hidden;
+                    text-overflow: ellipsis;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;  
+                }
             }
         }
     }
