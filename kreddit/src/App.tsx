@@ -1,5 +1,5 @@
 import { Search, Shuffle } from '@mui/icons-material';
-import './App.css';
+import './App.scss';
 
 function App() {
 
