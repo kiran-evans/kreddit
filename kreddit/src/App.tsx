@@ -1,5 +1,6 @@
 import { Search, Shuffle } from '@mui/icons-material';
 import './App.scss';
+import { PostCard } from './components/PostCard';
 
 function App() {
 
@@ -21,7 +22,10 @@ function App() {
             </header>
 
             <main>
-
+                <PostCard title='Took this photo' img='' author='random-photographer256' date={new Date} upvotes={27} />
+                <PostCard title='Took this photo' img='' author='random-photographer256' date={new Date} upvotes={27} />
+                <PostCard title='Took this photo' img='' author='random-photographer256' date={new Date} upvotes={27} />
+                <PostCard title='Took this photo' img='' author='random-photographer256' date={new Date} upvotes={27} />
             </main>
         </>
     )
