@@ -1,23 +1,31 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-interface Props {
-    title: string;
-    img: string;
-    author: string;
-    date: Date;
-    upvotes: number;
-}
+import { OpenInNew } from "@mui/icons-material";
 
-export const PostCard = (props: Props) => {
-    const { title, img, author, date, upvotes } = props;
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+export const PostCard = (props: any) => {
+    const { data } = props;
+    const {
+        title,
+        thumbnail,
+        thumbnail_width,
+        author,
+        score,
+        subreddit_name_prefixed,
+        url,
+        domain
+    } = data;
     
     return (
         <article className="postCard">
-            <img src={img} alt={title} />
+            {thumbnail_width && <img src={thumbnail} alt={thumbnail} />}
             <section>
                 <h2>{title}</h2>
                 <p className="author">{author}</p>
-                <time>{date.toLocaleDateString()}</time>
-                <p>{upvotes} upvotes</p>
+                <p>{score}</p>
+                <p>Posted to {subreddit_name_prefixed}</p>
+                {!domain.includes("self") && <a className="originLink" href={url} target="_blank" rel="noopener noreferrer"><OpenInNew />&nbsp;{domain}</a>}
             </section>
         </article>
     )
