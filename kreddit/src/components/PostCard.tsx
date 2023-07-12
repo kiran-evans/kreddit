@@ -12,11 +12,13 @@ export const PostCard = (props: Props) => {
     
     return (
         <article className="postCard">
-            <h2>{title}</h2>
             <img src={img} alt={title} />
-            <p className="author">{author}</p>
-            <time>{date.toLocaleDateString()}</time>
-            <p>{upvotes} upvotes</p>
+            <section>
+                <h2>{title}</h2>
+                <p className="author">{author}</p>
+                <time>{date.toLocaleDateString()}</time>
+                <p>{upvotes} upvotes</p>
+            </section>
         </article>
     )
 }
