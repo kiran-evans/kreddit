@@ -91,7 +91,34 @@ main {
 
         & section {
             background-color: $light-grey;
-            padding: 0 1rem;
+            padding: 1rem 1rem;
+
+            & h2 {
+                margin: 0;
+                margin-bottom: 1rem;
+            }
+
+            & p {
+                margin: 0;
+
+                &.author {
+                    display: inline;
+                }
+
+                &.subreddit {
+                    float: right;
+                }
+
+                &.score {
+                    font-weight: bold;
+                }
+            }
+
+            & a.originLink {
+                display: flex;
+                align-items: center;
+                color: $accent-blue;
+            }
         }
     }
 }

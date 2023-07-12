@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
@@ -23,9 +24,9 @@ export const PostCard = (props: any) => {
             <section>
                 <h2>{title}</h2>
                 <p className="author">{author}</p>
-                <p>{score}</p>
-                <p>Posted to {subreddit_name_prefixed}</p>
-                {!domain.includes("self") && <a className="originLink" href={url} target="_blank" rel="noopener noreferrer"><OpenInNew />&nbsp;{domain}</a>}
+                <p className="subreddit">{subreddit_name_prefixed}</p>
+                <p className="score">{Intl.NumberFormat('en-GB').format(score)}</p>
+                {!domain.includes("self") && <a className="originLink" href={url} target="_blank" rel="noopener noreferrer"><OpenInNew sx={{ fontSize: "small" }} />&nbsp;{domain}</a>}
             </section>
         </article>
     )
