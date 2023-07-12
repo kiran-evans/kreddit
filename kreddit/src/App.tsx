@@ -1,4 +1,5 @@
-import './App.css'
+import { Search, Shuffle } from '@mui/icons-material';
+import './App.css';
 
 function App() {
 
@@ -7,10 +8,15 @@ function App() {
             <header>
                 <h1>kreddit</h1>
 
-                <input id="search" type="search" />
+                <div id="searchContainer">
+                    <span>
+                        <Search />
+                    </span>
+                    <input id="search" type="search" />
+                </div>
 
                 <button id="random">
-                    Random
+                    <Shuffle />
                 </button>
             </header>
 
