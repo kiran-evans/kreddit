@@ -2,12 +2,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface DialogState {
     isOpen: boolean,
-    data: any[]
+    data: any
 }
 
 const initialState: DialogState = {
     isOpen: false,
-    data: []
+    data: {}
 }
 
 export const dialogSlice = createSlice({

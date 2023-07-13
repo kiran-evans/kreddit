@@ -5,7 +5,7 @@ export const Dialog = () => {
 
     return (
         <dialog open={isOpen}>
-            Test
+            <h2>{data.title}</h2>
         </dialog>
     )
 }
