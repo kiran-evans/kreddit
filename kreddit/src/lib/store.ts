@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import dialogReducer from './dialogSlice';
-import resultsReducer from './resultsSlice';
+import searchReducer from './searchSlice';
 
 export const store = configureStore({
     reducer: {
-        results: resultsReducer,
+        search: searchReducer,
         dialog: dialogReducer
     }
 });

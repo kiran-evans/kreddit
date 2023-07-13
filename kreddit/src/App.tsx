@@ -1,18 +1,18 @@
 import { Search, Shuffle } from '@mui/icons-material';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import './App.scss';
 import { Dialog } from './components/Dialog';
 import { PostCard } from './components/PostCard';
-import { useAppSelector } from './lib/hooks';
-import { setResults } from './lib/resultsSlice';
+import { setDialog } from './lib/dialogSlice';
+import { useAppDispatch, useAppSelector } from './lib/hooks';
+import { setResults } from './lib/searchSlice';
 
 function App() {
-    const results = useAppSelector((state) => state.results.value);
+    const search = useAppSelector((state) => state.search);
     const dialog = useAppSelector((state) => state.dialog);
-    const dispatch = useDispatch();    
+    const dispatch = useAppDispatch();
 
-    // Get initial results from r/popular
+    // Get initial search from r/popular
     useEffect(() => {
         (async () => {
             try {
@@ -27,7 +27,7 @@ function App() {
                 return;
             }
         })();
-    }, []);
+    }, []);    
 
     return (
         <>
@@ -41,18 +41,16 @@ function App() {
                     <input id="search" type="search" />
                 </div>
 
-                <button id="random">
+                <button id="random" onClick={() => dispatch(setDialog({ isOpen: true, data: []}))}>
                     <Shuffle />
                 </button>
             </header>
 
             <main>
-                {results.map((r: any) => (
+                {search.results.map((r: any) => (
                     <PostCard key={r.data.id} data={r.data} />
                 ))}
-                {dialog.isOpen && 
-                    <Dialog data={dialog.data} />
-                }
+                <Dialog />
             </main>
         </>
     )

@@ -1,9 +1,11 @@
-export const Dialog = (props: any) => {
+import { useAppSelector } from "../lib/hooks";
 
-    const { data } = props;
+export const Dialog = () => {
+    const { isOpen, data } = useAppSelector((state) => state.dialog);
 
     return (
-        <dialog>
+        <dialog open={isOpen}>
+            Test
         </dialog>
     )
 }

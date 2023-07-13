@@ -1,4 +1,6 @@
 import { Comment, OpenInNew, Star } from "@mui/icons-material";
+import { setDialog } from "../lib/dialogSlice";
+import { useAppDispatch } from "../lib/hooks";
 
 export const PostCard = (props: any) => {
     const { data } = props;
@@ -14,9 +16,14 @@ export const PostCard = (props: any) => {
         num_comments,
         score
     } = data;
+
+    const dispatch = useAppDispatch();
     
     return (
-        <article className="postCard">
+        <article className="postCard" onClick={() => dispatch(setDialog({
+                        isOpen: true,
+                        data: data
+                    }))}>
             {thumbnail_width && <div className="thumbnail">
                 <img src={thumbnail} />
             </div>}
