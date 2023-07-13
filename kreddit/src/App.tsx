@@ -47,9 +47,12 @@ function App() {
             </header>
 
             <main>
-                {search.results.map((r: any) => (
-                    <PostCard key={r.data.id} data={r.data} />
-                ))}
+                <section id="posts">
+                    {search.results.map((r: any) => (
+                        <PostCard key={r.data.id} data={r.data} />
+                    ))}
+                </section>
+
                 <Dialog />
             </main>
         </>
