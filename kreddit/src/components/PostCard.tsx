@@ -1,11 +1,5 @@
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-
 import { Comment, OpenInNew, Star } from "@mui/icons-material";
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 export const PostCard = (props: any) => {
     const { data } = props;
     const {

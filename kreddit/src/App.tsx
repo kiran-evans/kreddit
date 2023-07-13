@@ -1,18 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { Search, Shuffle } from '@mui/icons-material';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import './App.scss';
+import { Dialog } from './components/Dialog';
 import { PostCard } from './components/PostCard';
 import { useAppSelector } from './lib/hooks';
 import { setResults } from './lib/resultsSlice';
 
 function App() {
     const results = useAppSelector((state) => state.results.value);
+    const dialog = useAppSelector((state) => state.dialog);
     const dispatch = useDispatch();    
 
     // Get initial results from r/popular
@@ -53,6 +50,9 @@ function App() {
                 {results.map((r: any) => (
                     <PostCard key={r.data.id} data={r.data} />
                 ))}
+                {dialog.isOpen && 
+                    <Dialog data={dialog.data} />
+                }
             </main>
         </>
     )
