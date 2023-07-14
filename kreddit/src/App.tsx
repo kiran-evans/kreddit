@@ -1,35 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Search, Shuffle } from '@mui/icons-material';
+import { useEffect } from 'react';
+import './App.scss';
+import { Dialog } from './components/Dialog';
+import { PostCard } from './components/PostCard';
+import { setDialog } from './lib/dialogSlice';
+import { useAppDispatch, useAppSelector } from './lib/hooks';
+import { setResults } from './lib/searchSlice';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const search = useAppSelector((state) => state.search);
+    const dialog = useAppSelector((state) => state.dialog);
+    const dispatch = useAppDispatch();
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    // Get initial search from r/popular
+    useEffect(() => {
+        (async () => {
+            try {
+                const res = await fetch('https://www.reddit.com/r/popular.json', {
+                    method: 'GET'
+                });
+                const { data } = await res.json();
+                dispatch(setResults(data.children));
+                
+            } catch (err: any) {
+                console.error(err);
+                return;
+            }
+        })();
+    }, []);    
+
+    return (
+        <>
+            <header>
+                <h1>kreddit</h1>
+
+                <div id="searchContainer">
+                    <span>
+                        <Search />
+                    </span>
+                    <input id="search" type="search" />
+                </div>
+
+                <button id="random" onClick={() => dispatch(setDialog({ isOpen: true, data: []}))}>
+                    <Shuffle />
+                </button>
+            </header>
+
+            <main>
+                <section id="posts">
+                    {search.results.map((r: any) => (
+                        <PostCard key={r.data.id} data={r.data} />
+                    ))}
+                </section>
+
+                <Dialog />
+            </main>
+        </>
+    )
 }
 
 export default App
