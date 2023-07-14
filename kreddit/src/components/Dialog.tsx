@@ -1,6 +1,6 @@
 import { Close, Comment, OpenInNew, Reddit, Shuffle, Star } from "@mui/icons-material";
 import { setDialog } from "../lib/dialogSlice";
-import { useAppDispatch, useAppSelector } from "../lib/hooks";
+import { useAppDispatch, useAppSelector, useMarkdown } from "../lib/hooks";
 
 export const Dialog = () => {
     const { isOpen, data } = useAppSelector((state) => state.dialog);
@@ -41,7 +41,7 @@ export const Dialog = () => {
                         <p id="score"><Star sx={{ fontSize: "1em" }} />&nbsp;{Intl.NumberFormat('en-GB').format(score)} points</p>
                         <p id="crossposts"><Shuffle sx={{ fontSize: "1em" }} />&nbsp;{Intl.NumberFormat('en-GB').format(num_crossposts)} crossposts</p>
                     </div>
-                    {selftext && <p id="selftext">{selftext}</p>}
+                    {selftext && <div id="selftext">{useMarkdown(selftext)}</div>}
                     <button id="opButton"><a href={`https://reddit.com${permalink}`} target="_blank" rel="noopener noreferrer"><Reddit sx={{ fontSize: "1.2em" }} />&nbsp;See the full post on reddit</a></button>
                 </article>
             </dialog>
