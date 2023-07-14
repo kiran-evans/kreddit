@@ -20,14 +20,16 @@ export const Dialog = () => {
         permalink
     } = data;
 
-    if (!Object.keys(data).length) return (
+    const postBody = useMarkdown(selftext);    
+
+    if (!isOpen) return (
         <></>
     )
 
     return (
         <section id="dialog">
             {isOpen && <div id="backdrop" onClick={() => dispatch(setDialog({ isOpen: false, data: [] }))}></div>}
-            <dialog open={isOpen}>
+            <dialog open={(isOpen)}>
                 {thumbnail.includes("http") && <div className="thumbnail">
                     <img src={thumbnail} />
                 </div>}
@@ -41,7 +43,7 @@ export const Dialog = () => {
                         <p id="score"><Star sx={{ fontSize: "1em" }} />&nbsp;{Intl.NumberFormat('en-GB').format(score)} points</p>
                         <p id="crossposts"><Shuffle sx={{ fontSize: "1em" }} />&nbsp;{Intl.NumberFormat('en-GB').format(num_crossposts)} crossposts</p>
                     </div>
-                    {selftext && <div id="selftext">{useMarkdown(selftext)}</div>}
+                    {selftext && <div id="selftext">{postBody}</div>}
                     <button id="opButton"><a href={`https://reddit.com${permalink}`} target="_blank" rel="noopener noreferrer"><Reddit sx={{ fontSize: "1.2em" }} />&nbsp;See the full post on reddit</a></button>
                 </article>
             </dialog>

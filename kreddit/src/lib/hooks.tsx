@@ -12,7 +12,7 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export const useMarkdown = (str: string) => {
 
-    const [result, setResult] = useState("" as string | JSX.Element | JSX.Element[]);
+    const [result, setResult] = useState({} as JSX.Element);
 
     useEffect(() => {
         (async () => {
@@ -21,13 +21,13 @@ export const useMarkdown = (str: string) => {
                 .use(remarkHtml)
                 .process(str);
             
-            setResult(parse(String(file)));
+            setResult(parse(String(file)) as JSX.Element);
         })();
-    }, []);
+    }, [str]);    
 
     return (
         <>
-            {result ? result : <p>Loading...</p>}
+            {Boolean(Object.keys(result).length) ? result : <p>Loading...</p>}
         </>
     )
 }
