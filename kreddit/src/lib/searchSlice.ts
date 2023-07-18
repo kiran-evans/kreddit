@@ -10,6 +10,29 @@ const initialState: SearchState = {
     results: []
 }
 
+export enum SearchType {
+    'link',
+    'comment',
+    'sr',
+    'user'
+}
+
+export enum SearchSort {
+    'relevance',
+    'hot',
+    'top',
+    'new'
+}
+
+export enum SearchTime {
+    'all',
+    'year',
+    'month',
+    'week',
+    'day',
+    'hour'
+}
+
 export const searchSlice = createSlice({
     name: 'search',
     initialState,
