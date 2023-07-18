@@ -1,15 +1,14 @@
-import { Search, Shuffle } from '@mui/icons-material';
-import { useEffect } from 'react';
+import { Search } from '@mui/icons-material';
+import { FormEvent, useEffect } from 'react';
 import './App.scss';
 import { Dialog } from './components/Dialog';
 import { PostCard } from './components/PostCard';
-import { setDialog } from './lib/dialogSlice';
+import { SearchSettings } from './components/SearchSettings';
 import { useAppDispatch, useAppSelector } from './lib/hooks';
-import { setResults } from './lib/searchSlice';
+import { setQuery, setResults } from './lib/searchSlice';
 
 function App() {
     const search = useAppSelector((state) => state.search);
-    const dialog = useAppSelector((state) => state.dialog);
     const dispatch = useAppDispatch();
 
     // Get initial search from r/popular
@@ -27,7 +26,39 @@ function App() {
                 return;
             }
         })();
-    }, []);    
+    }, []);
+
+    const performSearch = async () => {
+        try {
+            // If no search term is in the box, return early as this will produce no results
+            if (!search.query.q) return;
+
+            const query = `https://www.reddit.com/search.json?q=${search.query.q}&type=${search.query.type}&sort=${search.query.sort}&t=${search.query.t}`;
+            console.log(query);
+            
+            const res = await fetch(encodeURI(query), {
+                method: 'GET'
+            });
+            const { data } = await res.json();
+            dispatch(setResults(data.children));
+            
+        } catch (err: any) {
+            console.error(err);
+            return;
+        }
+    }
+
+    // Search again whenever the options are changed
+    useEffect(() => {
+        (async () => {
+            await performSearch();
+        })();
+    }, [search.query.type, search.query.sort, search.query.t]);
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        await performSearch();
+    }
 
     return (
         <>
@@ -38,12 +69,12 @@ function App() {
                     <span>
                         <Search />
                     </span>
-                    <input id="search" type="search" />
+                    <form onSubmit={e => handleSubmit(e)}>
+                        <input id="search" type="search" placeholder='Search...' onChange={e => dispatch(setQuery({...search.query, q: e.target.value}))} value={search.query.q} />
+                    </form>
                 </div>
 
-                <button id="random" onClick={() => dispatch(setDialog({ isOpen: true, data: []}))}>
-                    <Shuffle />
-                </button>
+                <SearchSettings />
             </header>
 
             <main>

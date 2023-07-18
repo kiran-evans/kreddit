@@ -1,6 +1,6 @@
 import { Comment, OpenInNew, Star } from "@mui/icons-material";
 import { setDialog } from "../lib/dialogSlice";
-import { useAppDispatch } from "../lib/hooks";
+import { useAppDispatch, useMarkdown } from "../lib/hooks";
 
 export const PostCard = (props: any) => {
     const { data } = props;
@@ -17,6 +17,8 @@ export const PostCard = (props: any) => {
     } = data;
 
     const dispatch = useAppDispatch();
+
+    const postBody = useMarkdown(selftext);
     
     return (
         <article className="postCard" onClick={() => dispatch(setDialog({
@@ -34,7 +36,7 @@ export const PostCard = (props: any) => {
                     <p className="comments" title={`${Intl.NumberFormat('en-GB').format(num_comments)} comments`}><Comment sx={{ fontSize: "1em" }} />&nbsp;{Intl.NumberFormat('en-GB').format(num_comments)}</p>
                     <p className="score" title={`Score: ${Intl.NumberFormat('en-GB').format(score)}`}><Star sx={{ fontSize: "1em" }} />&nbsp;{Intl.NumberFormat('en-GB').format(score)}</p>
                 </div>
-                {selftext && <p className="selftext">{selftext}</p>}
+                {selftext && <div className="selftext">{postBody}</div>}
             </section>
         </article>
     )
