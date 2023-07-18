@@ -1,9 +1,9 @@
-import { Search, Shuffle } from '@mui/icons-material';
+import { Search } from '@mui/icons-material';
 import { FormEvent, useEffect } from 'react';
 import './App.scss';
 import { Dialog } from './components/Dialog';
 import { PostCard } from './components/PostCard';
-import { setDialog } from './lib/dialogSlice';
+import { SearchSettings } from './components/SearchSettings';
 import { useAppDispatch, useAppSelector } from './lib/hooks';
 import { setQuery, setResults } from './lib/searchSlice';
 
@@ -53,13 +53,11 @@ function App() {
                         <Search />
                     </span>
                     <form onSubmit={e => handleSubmit(e)}>
-                        <input id="search" type="search" onChange={e => dispatch(setQuery(e.target.value))} value={search.query} />
+                        <input id="search" type="search" placeholder='Search...' onChange={e => dispatch(setQuery(e.target.value))} value={search.query} />
                     </form>
                 </div>
 
-                <button id="random" onClick={() => dispatch(setDialog({ isOpen: true, data: []}))}>
-                    <Shuffle />
-                </button>
+                <SearchSettings />
             </header>
 
             <main>

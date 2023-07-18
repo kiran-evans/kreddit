@@ -1,15 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-interface SearchState {
-    query: string;
-    results: any[];
-}
-
-const initialState: SearchState = {
-    query: "",
-    results: []
-}
-
 export enum SearchType {
     'link',
     'comment',
@@ -33,12 +23,34 @@ export enum SearchTime {
     'hour'
 }
 
+export interface SearchOptions {
+    type: SearchType;
+    sort: SearchSort;
+    t: SearchTime;
+}
+
+interface SearchState {
+    query: string;
+    options: SearchOptions;
+    results: any[];
+}
+
+const initialState: SearchState = {
+    query: "",
+    options: {
+        type: SearchType.link,
+        sort: SearchSort.relevance,
+        t: SearchTime.week
+    },
+    results: []
+}
+
 export const searchSlice = createSlice({
     name: 'search',
     initialState,
     reducers: {
         setSearch: (state, action: PayloadAction<SearchState>) => {            
-            state = action.payload;
+            state = { ...action.payload };
         },
         setQuery: (state, action: PayloadAction<string>) => {
             state.query = action.payload;
