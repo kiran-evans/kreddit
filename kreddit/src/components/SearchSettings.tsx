@@ -1,21 +1,26 @@
-import { SearchSort, SearchTime, SearchType } from "../lib/searchSlice"
+import { useAppDispatch, useAppSelector } from "../lib/hooks";
+import { SearchSort, SearchTime, SearchType, setQuery } from "../lib/searchSlice";
 
 export const SearchSettings = () => {
-    return (                
+
+    const dispatch = useAppDispatch();
+    const search = useAppSelector((state) => state.search);
+
+    return (
         <div id="searchOptionsContainer">
-            <select>
-                {Object.values(SearchType).filter(v => typeof v === 'string').map(t => (
-                    <option>{t}</option>
+            <select value={search.query.type}>
+                {Object.keys(SearchType).map(t => (
+                    <option onClick={() => dispatch(setQuery({...search.query, type: t}))} value={t}>{SearchType[t]}</option>
                 ))}
             </select>
-            <select>
-                {Object.values(SearchSort).filter(v => typeof v === 'string').map(t => (
-                    <option>{t}</option>
+            <select value={search.query.sort}>
+                {Object.keys(SearchSort).map(t => (
+                    <option onClick={() => dispatch(setQuery({...search.query, sort: t}))} value={t}>{SearchSort[t]}</option>
                 ))}
             </select>
-            <select>
-                {Object.values(SearchTime).filter(v => typeof v === 'string').map(t => (
-                    <option>{t}</option>
+            <select value={search.query.t}>
+                {Object.keys(SearchTime).map(t => (
+                    <option onClick={() => dispatch(setQuery({...search.query, t: t}))} value={t}>{SearchTime[t]}</option>
                 ))}
             </select>
         </div>

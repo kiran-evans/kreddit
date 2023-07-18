@@ -28,10 +28,15 @@ function App() {
         })();
     }, []);
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();        
+    const performSearch = async () => {
         try {
-            const res = await fetch(encodeURI(`https://www.reddit.com/search.json?q=${search.query}`), {
+            // If no search term is in the box, return early as this will produce no results
+            if (!search.query.q) return;
+
+            const query = `https://www.reddit.com/search.json?q=${search.query.q}&type=${search.query.type}&sort=${search.query.sort}&t=${search.query.t}`;
+            console.log(query);
+            
+            const res = await fetch(encodeURI(query), {
                 method: 'GET'
             });
             const { data } = await res.json();
@@ -41,6 +46,18 @@ function App() {
             console.error(err);
             return;
         }
+    }
+
+    // Search again whenever the options are changed
+    useEffect(() => {
+        (async () => {
+            await performSearch();
+        })();
+    }, [search.query.type, search.query.sort, search.query.t]);
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        await performSearch();
     }
 
     return (
@@ -53,7 +70,7 @@ function App() {
                         <Search />
                     </span>
                     <form onSubmit={e => handleSubmit(e)}>
-                        <input id="search" type="search" placeholder='Search...' onChange={e => dispatch(setQuery(e.target.value))} value={search.query} />
+                        <input id="search" type="search" placeholder='Search...' onChange={e => dispatch(setQuery({...search.query, q: e.target.value}))} value={search.query.q} />
                     </form>
                 </div>
 

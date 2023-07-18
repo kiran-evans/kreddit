@@ -1,46 +1,46 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export enum SearchType {
-    'link',
-    'comment',
-    'sr',
-    'user'
+export const SearchType: any = {
+    'link': "Posts",
+    'comment': "Comments",
+    'sr': "Communities",
+    'user': "Users"
 }
 
-export enum SearchSort {
-    'relevance',
-    'hot',
-    'top',
-    'new'
+export const SearchSort: any = {
+    'relevance': "Relevance",
+    'hot': "Hot",
+    'top': "Top",
+    'new': "New"
 }
 
-export enum SearchTime {
-    'all',
-    'year',
-    'month',
-    'week',
-    'day',
-    'hour'
+export const SearchTime: any = {
+    'all': "All Time",
+    'year': "Past Year",
+    'month': "Past Month",
+    'week': "Past Week",
+    'day': "Past Day",
+    'hour': "Past Hour"
 }
 
-export interface SearchOptions {
-    type: SearchType;
-    sort: SearchSort;
-    t: SearchTime;
+export interface SearchQuery {
+    q: string;
+    type: string;
+    sort: string;
+    t: string;
 }
 
 interface SearchState {
-    query: string;
-    options: SearchOptions;
+    query: SearchQuery;
     results: any[];
 }
 
 const initialState: SearchState = {
-    query: "",
-    options: {
-        type: SearchType.link,
-        sort: SearchSort.relevance,
-        t: SearchTime.week
+    query: {
+        q: "",
+        type: 'link',
+        sort: 'relevance',
+        t: 'week'
     },
     results: []
 }
@@ -49,10 +49,7 @@ export const searchSlice = createSlice({
     name: 'search',
     initialState,
     reducers: {
-        setSearch: (state, action: PayloadAction<SearchState>) => {            
-            state = { ...action.payload };
-        },
-        setQuery: (state, action: PayloadAction<string>) => {
+        setQuery: (state, action: PayloadAction<SearchQuery>) => {
             state.query = action.payload;
         },
         setResults: (state, action: PayloadAction<any[]>) => {
@@ -61,6 +58,6 @@ export const searchSlice = createSlice({
     }
 });
 
-export const { setSearch, setQuery, setResults } = searchSlice.actions;
+export const { setQuery, setResults } = searchSlice.actions;
 
 export default searchSlice.reducer;
