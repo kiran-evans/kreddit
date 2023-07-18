@@ -169,6 +169,7 @@ main {
                 & a.originLink {
                     font-size: small;
                     display: flex;
+                    justify-self: start;
                     align-items: center;
                     color: $accent-blue;
                     margin-bottom: 0.2rem;
@@ -274,7 +275,7 @@ main {
 
                 & #selftext {
                     background-color: rgba(255,255,255,0.1);
-                    padding: 0.5rem 1em;
+                    padding: 0rem 1em;
                     border-radius: 0.4em;
                     font-size: 1.2rem;
                     margin-top: 1rem;
