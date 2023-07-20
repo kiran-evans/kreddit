@@ -7,7 +7,7 @@ export const SearchSettings = () => {
     const search = useAppSelector((state) => state.search);
 
     return (
-        <div id="searchOptionsContainer">
+        <div id="searchOptionsContainer" data-testid="searchSettings">
             <select value={search.query.type}>
                 {Object.keys(SearchType).map(t => (
                     <option onClick={() => dispatch(setQuery({...search.query, type: t}))} value={t}>{SearchType[t]}</option>
