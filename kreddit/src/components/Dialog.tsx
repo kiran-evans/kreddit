@@ -33,7 +33,7 @@ export const Dialog = () => {
                 <div id="backdrop" onClick={() => dispatch(setDialog({ isOpen: false, data: [] }))}></div>
             </Fade>
             <Grow in={isOpen}>
-                <dialog>
+                <dialog data-testid="dialog">
                     {thumbnail.includes("http") && <div className="thumbnail">
                         <img src={thumbnail} />
                     </div>}

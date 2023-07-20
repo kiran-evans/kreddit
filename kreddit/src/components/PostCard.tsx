@@ -21,7 +21,7 @@ export const PostCard = (props: any) => {
     const postBody = useMarkdown(selftext);
     
     return (
-        <article className="postCard" onClick={() => dispatch(setDialog({
+        <article className="postCard" data-testid="postCard" onClick={() => dispatch(setDialog({
                         isOpen: true,
                         data: data
                     }))}>
