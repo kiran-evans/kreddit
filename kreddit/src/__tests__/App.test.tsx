@@ -16,7 +16,15 @@ describe("<App />", () => {
         );
     });
 
-    test('Should render a <header>', () => {
-        expect(screen.getByText("kreddit")).toBeDefined();
+    test('should render an <h1>', () => {
+        expect(screen.getByRole("heading")).toBeInTheDocument();
+    });
+
+    test('should render an <input> with type="search"', () => {
+        expect(screen.getByRole("searchbox")).toBeInTheDocument();
+    });
+
+    test('should render a <main>', () => {
+        expect(screen.getByRole("main")).toBeInTheDocument();
     });
 });
