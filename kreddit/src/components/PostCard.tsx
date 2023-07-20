@@ -21,14 +21,14 @@ export const PostCard = (props: any) => {
     const postBody = useMarkdown(selftext);
     
     return (
-        <article className="postCard" onClick={() => dispatch(setDialog({
+        <article className="postCard" data-testid="postCard" onClick={() => dispatch(setDialog({
                         isOpen: true,
                         data: data
                     }))}>
             {thumbnail.includes("http") && <div className="thumbnail">
                 <img src={thumbnail} />
             </div>}
-            <section>
+            <section data-testid="postCardSection">
                 {(!domain.includes("self") && !domain.includes("redd.it") && !domain.includes("reddit")) && <a className="originLink" href={url} target="_blank" rel="noopener noreferrer" title={`Go to original source on ${domain}`}><OpenInNew sx={{ fontSize: "1em" }} />&nbsp;{domain}</a>}
                 <h2>{title}</h2>
                 <p className="posted">Posted to <a href={`https://www.reddit.com/${subreddit_name_prefixed}`} title={`Go to ${subreddit_name_prefixed} homepage`} target="_blank" rel="noopener noreferrer">{subreddit_name_prefixed}</a> by <a href={`https://www.reddit.com/u/${author}`} title={`Go to ${author}'s profile`} target="_blank" rel="noopener noreferrer">{author}</a></p>
