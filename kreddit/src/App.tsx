@@ -68,7 +68,7 @@ function App() {
 
                 <div id="searchContainer">
                     <span id="searchIcon">
-                        <Search />
+                        <Search sx={{fontSize: "1.5em"}} />
                     </span>
                     <form onSubmit={e => handleSubmit(e)}>
                         <input id="search" type="search" placeholder='Search...' onChange={e => dispatch(setQuery({...search.query, q: e.target.value}))} value={search.query.q} />
