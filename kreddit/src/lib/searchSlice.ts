@@ -44,7 +44,6 @@ export const searchSlice = createSlice({
     reducers: {
         setQuery: (state, action: PayloadAction<SearchQuery>) => {
             state.query = action.payload;
-            state.isFetching = true;
         },
         setResults: (state, action: PayloadAction<any[]>) => {
             state.results = action.payload;

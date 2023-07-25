@@ -15,8 +15,8 @@ function App() {
     // Get initial search from r/popular
     useEffect(() => {
         (async () => {
-            dispatch(startFetch());
             try {
+                dispatch(startFetch());
                 const res = await fetch('https://www.reddit.com/r/popular.json', {
                     method: 'GET'
                 });
@@ -25,8 +25,8 @@ function App() {
                 
             } catch (err: any) {
                 console.error(err);
+                dispatch(endFetch())
             }
-            dispatch(endFetch())
         })();
     }, []);
 
@@ -34,6 +34,7 @@ function App() {
         try {
             // If no search term is in the box, return early as this will produce no results
             if (!search.query.q) return;
+            dispatch(startFetch());
 
             const query = `https://www.reddit.com/search.json?q=${search.query.q}&sort=${search.query.sort}&t=${search.query.t}`;
             console.log(query);
@@ -46,6 +47,7 @@ function App() {
             
         } catch (err: any) {
             console.error(err);
+            dispatch(endFetch())
         }
     }
 
