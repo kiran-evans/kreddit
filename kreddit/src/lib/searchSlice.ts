@@ -25,6 +25,7 @@ export interface SearchQuery {
 interface SearchState {
     query: SearchQuery;
     results: any[];
+    isFetching?: boolean;
 }
 
 const initialState: SearchState = {
@@ -33,7 +34,8 @@ const initialState: SearchState = {
         sort: 'relevance',
         t: 'week'
     },
-    results: []
+    results: [],
+    isFetching: false
 }
 
 export const searchSlice = createSlice({
@@ -42,13 +44,21 @@ export const searchSlice = createSlice({
     reducers: {
         setQuery: (state, action: PayloadAction<SearchQuery>) => {
             state.query = action.payload;
+            state.isFetching = true;
         },
         setResults: (state, action: PayloadAction<any[]>) => {
             state.results = action.payload;
+            state.isFetching = false;
+        },
+        startFetch: (state) => {
+            state.isFetching = true;
+        },
+        endFetch: (state) => {
+            state.isFetching = false;
         }
     }
 });
 
-export const { setQuery, setResults } = searchSlice.actions;
+export const { setQuery, setResults, startFetch, endFetch } = searchSlice.actions;
 
 export default searchSlice.reducer;

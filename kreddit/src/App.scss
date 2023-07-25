@@ -80,11 +80,10 @@ header {
         background-color: $bg-blue;
         margin-right: 1rem;
 
-        & > span {
+        & > span#searchIcon {
             display: flex;
             align-items: center;
             margin-left: 0.6rem;
-
         }
 
         & form {
@@ -104,6 +103,12 @@ header {
                     border: none;
                 }
             }
+        }
+
+        & > span#loadingSpinner {
+            display: flex;
+            align-items: center;
+            margin-right: 0.6rem;
         }
     }
 
