@@ -7,6 +7,8 @@ $bg-blue: #3daeff;
 $border-blue: #7bc5f9;
 $default-font: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
+$small-breakpoint: 750px;
+
 * {
     transition-duration: 200ms;
 }
@@ -66,9 +68,21 @@ header {
     box-shadow: 0px 0px 20px 10px rgba(0,0,0,0.6);
     z-index: 2;
 
+    @media only screen and (max-width: $small-breakpoint) {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+        padding: 0.5rem 0.5rem;
+    }
+
     & > h1 {
         flex: 1;
         margin: 0;
+
+        @media only screen and (max-width: $small-breakpoint) {
+            font-size: 1.8rem;
+            text-align: center;
+        }
     }
 
     & > #searchContainer {
@@ -79,6 +93,10 @@ header {
         border-radius: 0.5rem;
         background-color: $bg-blue;
         margin-right: 1rem;
+
+        @media only screen and (max-width: $small-breakpoint) {
+            margin: 0;
+        }
 
         & > span#searchIcon {
             display: flex;
@@ -130,6 +148,10 @@ header {
             padding: 0.2rem 1rem;
             border-radius: 0.4rem 0.4rem 0 0;
             font-family: $default-font;
+
+            @media only screen and (max-width: $small-breakpoint) {
+                flex: 1;
+            }
         }
     }
 }
