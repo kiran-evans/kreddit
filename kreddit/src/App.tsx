@@ -37,7 +37,6 @@ function App() {
             dispatch(startFetch());
 
             const query = `https://www.reddit.com/search.json?q=${search.query.q}&type=${search.query.type}&sort=${search.query.sort}&t=${search.query.t}`;
-            console.log(query);
             
             const res = await fetch(encodeURI(query), {
                 method: 'GET'
