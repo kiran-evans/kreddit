@@ -36,7 +36,7 @@ function App() {
             if (!search.query.q) return;
             dispatch(startFetch());
 
-            const query = `https://www.reddit.com/search.json?q=${search.query.q}&sort=${search.query.sort}&t=${search.query.t}`;
+            const query = `https://www.reddit.com/search.json?q=${search.query.q}&type=${search.query.type}&sort=${search.query.sort}&t=${search.query.t}`;
             console.log(query);
             
             const res = await fetch(encodeURI(query), {
@@ -56,7 +56,7 @@ function App() {
         (async () => {
             await performSearch();
         })();
-    }, [search.query.sort, search.query.t]);
+    }, [search.query.type, search.query.sort, search.query.t]);
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
