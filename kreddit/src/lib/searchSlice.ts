@@ -1,12 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-export const SearchType: any = {
-    'link': "Posts",
-    'comment': "Comments",
-    'sr': "Communities",
-    'user': "Users"
-}
-
 export const SearchSort: any = {
     'relevance': "Relevance",
     'hot': "Hot",
@@ -25,7 +18,6 @@ export const SearchTime: any = {
 
 export interface SearchQuery {
     q: string;
-    type: string;
     sort: string;
     t: string;
 }
@@ -33,16 +25,17 @@ export interface SearchQuery {
 interface SearchState {
     query: SearchQuery;
     results: any[];
+    isFetching?: boolean;
 }
 
 const initialState: SearchState = {
     query: {
         q: "",
-        type: 'link',
         sort: 'relevance',
         t: 'week'
     },
-    results: []
+    results: [],
+    isFetching: false
 }
 
 export const searchSlice = createSlice({
@@ -54,10 +47,17 @@ export const searchSlice = createSlice({
         },
         setResults: (state, action: PayloadAction<any[]>) => {
             state.results = action.payload;
+            state.isFetching = false;
+        },
+        startFetch: (state) => {
+            state.isFetching = true;
+        },
+        endFetch: (state) => {
+            state.isFetching = false;
         }
     }
 });
 
-export const { setQuery, setResults } = searchSlice.actions;
+export const { setQuery, setResults, startFetch, endFetch } = searchSlice.actions;
 
 export default searchSlice.reducer;
