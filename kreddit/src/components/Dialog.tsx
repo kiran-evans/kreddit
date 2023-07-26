@@ -35,7 +35,7 @@ export const Dialog = () => {
             <Grow in={isOpen}>
                 <dialog data-testid="dialog">
                     {thumbnail.includes("http") && <div className="thumbnail">
-                        <img src={thumbnail} />
+                        <img src={thumbnail} alt={title} />
                     </div>}
                     <article>
                         <span id="closeModal" title="Close" onClick={() => dispatch(setDialog({ isOpen: false, data: [] }))}><Close sx={{fontSize: "1em"}} /></span>

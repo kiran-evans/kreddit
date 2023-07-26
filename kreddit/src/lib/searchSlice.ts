@@ -1,5 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
+export const SearchType: any = {
+    'link': "Posts",
+    'comment': "Comments"
+}
+
 export const SearchSort: any = {
     'relevance': "Relevance",
     'hot': "Hot",
@@ -18,6 +23,7 @@ export const SearchTime: any = {
 
 export interface SearchQuery {
     q: string;
+    type: string;
     sort: string;
     t: string;
 }
@@ -31,6 +37,7 @@ interface SearchState {
 const initialState: SearchState = {
     query: {
         q: "",
+        type: "link",
         sort: 'relevance',
         t: 'week'
     },
