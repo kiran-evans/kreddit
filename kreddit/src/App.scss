@@ -1,10 +1,11 @@
 $bg-grey: #1e1e1e;
 $light-grey: #2b2b2b;
 $lighter-grey: #3b3b3b;
-$dark-blue: #004a7f;
-$accent-blue: #1e76b6;
-$bg-blue: #4995cc;
-$border-blue: #6daddc;
+$dark-blue: #182b46;
+$accent-blue: #5391ec;
+$bg-blue: #31578d;
+$border-blue: #a9c8f5;
+$accent-contrast: #ecae53;
 $default-font: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 
 $small-breakpoint: 768px;
@@ -31,6 +32,10 @@ a {
 
     &:hover {
         color: $border-blue;
+    }
+
+    &:active {
+        color: $accent-contrast;
     }
 }
 
@@ -61,7 +66,7 @@ button {
 
 header {
     flex: 1;
-    background-color: $accent-blue;
+    background-color: $dark-blue;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -392,7 +397,7 @@ main {
             background-color: $light-grey;
             border: none;
             box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.4);
-            max-width: 600px;
+            max-width: $medium-breakpoint;
             max-height: 80vh;
             display: flex;
             gap: 2rem;
@@ -529,7 +534,7 @@ main {
                 & button#opButton {
                     align-self: flex-start;
                     margin-top: 1rem;
-                    background-color: $dark-blue;
+                    background-color: $bg-blue;
                     border: 2px solid $border-blue;
                     padding: 0.3em 0.5em;
                     border-radius: 0.4em;
@@ -543,7 +548,7 @@ main {
                         align-items: center;
                         font-size: 1.3rem;
                         font-weight: bold;
-                        color: $border-blue;
+                        color: white;
                         text-decoration: none;
                     }
                 }
