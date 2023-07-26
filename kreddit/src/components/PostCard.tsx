@@ -26,7 +26,7 @@ export const PostCard = (props: any) => {
                         data: data
                     }))}>
             {thumbnail.includes("http") && <div className="thumbnail">
-                <img src={thumbnail} />
+                <img src={thumbnail} alt={title} />
             </div>}
             <section data-testid="postCardSection">
                 {(!domain.includes("self") && !domain.includes("redd.it") && !domain.includes("reddit")) && <a className="originLink" href={url} target="_blank" rel="noopener noreferrer" title={`Go to original source on ${domain}`}><OpenInNew sx={{ fontSize: "1em" }} />&nbsp;{domain}</a>}
