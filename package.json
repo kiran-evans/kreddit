@@ -1,12 +1,11 @@
 {
   "name": "kreddit",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.2",
   "type": "module",
   "packageManager": "npm@9.6.1",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --emptyOutDir --outDir=dist",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest --ui"
